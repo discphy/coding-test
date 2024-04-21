@@ -2,7 +2,7 @@ package section2;
 
 import java.util.Scanner;
 
-public class SieveOfEratosthenes {
+public class PrimeNumber {
 
     public int solution(int n) {
         int answer = 0;
@@ -21,7 +21,7 @@ public class SieveOfEratosthenes {
     }
 
     public static void main(String[] args) {
-        SieveOfEratosthenes T = new SieveOfEratosthenes();
+        PrimeNumber T = new PrimeNumber();
         Scanner kb = new Scanner(System.in);
         int n = kb.nextInt();
 
