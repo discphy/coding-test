@@ -1,28 +1,52 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
-  public String solution(int cnt, String str) {
-    String answer = "";
+  public List<Integer> solution(int n, int[] arr) {
+    List<Integer> answer = new ArrayList<>();
 
-	for (int i = 0; i < cnt; i++) {
-     	String tmp = str.substring(0, 7).replace("#", "1").replace("*", "0");
+    for (int i = 0; i < n; i++) {
+      int tmp = arr[i];
+      int res = 0;
 
-      	answer += (char) Integer.parseInt(tmp, 2);
+      while (tmp > 0) {
+		int t = tmp % 10;
+        res = res * 10 + t;
+        tmp /= 10;
+      }
 
-        str = str.substring(7);
+      if (isPrime(res)) {
+       	answer.add(res);
+      }
     }
 
-      return answer;
+    return answer;
+  }
+
+  private boolean isPrime(int res) {
+   	if (res == 1) return false;
+
+    for (int i = 2; i < res; i++) {
+     	if (res % i == 0) {
+         	return false;
+        }
+    }
+
+    return true;
   }
 
   public static void main(String[] args){
-    Main main = new Main();
+    Main T = new Main();
     Scanner in=new Scanner(System.in);
     int input1 = in.nextInt();
-    String input2 = in.next();
+	int[] arr = new int[input1];
 
-    System.out.println(main.solution(input1, input2));
-    return ;
+    for (int i = 0; i < input1; i++) {
+     	arr[i] = in.nextInt();
+    }
+
+	for (int a : T.solution(input1, arr)) {
+     	System.out.print(a + " ");
+    }
   }
 }
