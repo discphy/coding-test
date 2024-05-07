@@ -1,52 +1,48 @@
-import java.util.*;
+import java.util.Scanner;
 
 public class Main {
 
-  public List<Integer> solution(int n, int[] arr) {
-    List<Integer> answer = new ArrayList<>();
+    public int solution(int n, int[][] arr) {
+        int answer = 0;
 
-    for (int i = 0; i < n; i++) {
-      int tmp = arr[i];
-      int res = 0;
+        int[] dx = {-1, 0, 1, 0};
+        int[] dy = {0, 1, 0, -1};
 
-      while (tmp > 0) {
-		int t = tmp % 10;
-        res = res * 10 + t;
-        tmp /= 10;
-      }
 
-      if (isPrime(res)) {
-       	answer.add(res);
-      }
-    }
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                boolean flag = true;
 
-    return answer;
-  }
+                for (int k = 0; k < 4; k++) {
+                    int nx = i + dx[k];
+                    int ny = j + dy[k];
 
-  private boolean isPrime(int res) {
-   	if (res == 1) return false;
+                    if (nx >= 0 && nx < n && ny >= 0 && ny < n && arr[i][j] <= arr[nx][ny]) {
+                        flag = false;
+                        break;
+                    }
+                }
 
-    for (int i = 2; i < res; i++) {
-     	if (res % i == 0) {
-         	return false;
+                if (flag) { answer++; }
+            }
         }
+
+        return answer;
     }
 
-    return true;
-  }
+    public static void main(String[] args) {
+        Main T = new Main();
+        Scanner in = new Scanner(System.in);
+        int input1 = in.nextInt();
+        int[][] arr = new int[input1][input1];
 
-  public static void main(String[] args){
-    Main T = new Main();
-    Scanner in=new Scanner(System.in);
-    int input1 = in.nextInt();
-	int[] arr = new int[input1];
+        for (int i = 0; i < input1; i++) {
+            for (int j = 0; j < input1; j++) {
+                arr[i][j] = in.nextInt();
+            }
+        }
 
-    for (int i = 0; i < input1; i++) {
-     	arr[i] = in.nextInt();
+        System.out.print(T.solution(input1, arr));
+        return;
     }
-
-	for (int a : T.solution(input1, arr)) {
-     	System.out.print(a + " ");
-    }
-  }
 }
