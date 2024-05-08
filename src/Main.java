@@ -2,28 +2,34 @@ import java.util.Scanner;
 
 public class Main {
 
-    public int solution(int n, int[][] arr) {
+    public int solution(int n, int m, int[][] arr) {
         int answer = 0;
 
-        int[] dx = {-1, 0, 1, 0};
-        int[] dy = {0, 1, 0, -1};
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n; j++) {
+                int count = 0;
 
+                for (int k = 0; k < m; k++) {
+                    int pi = 0;
+                    int pj = 0;
 
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                boolean flag = true;
+                    for (int l = 0; l < n; l++) {
+                        if (arr[k][l] == i) {
+                            pi = l;
+                        }
 
-                for (int k = 0; k < 4; k++) {
-                    int nx = i + dx[k];
-                    int ny = j + dy[k];
-
-                    if (nx >= 0 && nx < n && ny >= 0 && ny < n && arr[i][j] <= arr[nx][ny]) {
-                        flag = false;
-                        break;
+                        if (arr[k][l] == j) {
+                            pj = l;
+                        }
+                    }
+                    if (pi > pj) {
+                        count++;
                     }
                 }
 
-                if (flag) { answer++; }
+                if (count == m) {
+                    answer++;
+                }
             }
         }
 
@@ -34,15 +40,16 @@ public class Main {
         Main T = new Main();
         Scanner in = new Scanner(System.in);
         int input1 = in.nextInt();
-        int[][] arr = new int[input1][input1];
+        int input2 = in.nextInt();
+        int[][] arr = new int[input2][input1];
 
-        for (int i = 0; i < input1; i++) {
+        for (int i = 0; i < input2; i++) {
             for (int j = 0; j < input1; j++) {
                 arr[i][j] = in.nextInt();
             }
         }
 
-        System.out.print(T.solution(input1, arr));
+        System.out.print(T.solution(input1, input2, arr));
         return;
     }
 }
