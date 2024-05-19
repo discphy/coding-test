@@ -1,35 +1,40 @@
-import java.util.Scanner;
+import java.util.*;
+
 
 public class Main {
 
-    public int solution(int n, int m, int[][] arr) {
-        int answer = 0;
+    public List<Integer> solution(int n, int[] arr1, int m, int[] arr2) {
+        List<Integer> answer = new ArrayList<>();
+        int p1 = 0;
+        int p2 = 0;
 
-        for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <= n; j++) {
-                int count = 0;
+        Arrays.sort(arr1);
+        Arrays.sort(arr2);
 
-                for (int k = 0; k < m; k++) {
-                    int pi = 0;
-                    int pj = 0;
+        while (p1 < n && p2 < m) {
+            if (arr1[p1] < arr2[p2]) {
+                answer.add(arr1[p1]);
+                p1++;
+            } else if (arr1[p1] > arr2[p2]) {
+                answer.add(arr2[p2]);
+                p2++;
+            } else {
+                answer.add(arr1[p1]);
+                p1++;
+                answer.add(arr2[p2]);
+                p2++;
+            }
+        }
 
-                    for (int l = 0; l < n; l++) {
-                        if (arr[k][l] == i) {
-                            pi = l;
-                        }
+        if (p1 < n) {
+            for (int i = p1; i < n; i++) {
+                answer.add(arr1[i]);
+            }
+        }
 
-                        if (arr[k][l] == j) {
-                            pj = l;
-                        }
-                    }
-                    if (pi > pj) {
-                        count++;
-                    }
-                }
-
-                if (count == m) {
-                    answer++;
-                }
+        if (p2 < m) {
+            for (int i = p2; i < m; i++) {
+                answer.add(arr2[i]);
             }
         }
 
@@ -40,16 +45,22 @@ public class Main {
         Main T = new Main();
         Scanner in = new Scanner(System.in);
         int input1 = in.nextInt();
-        int input2 = in.nextInt();
-        int[][] arr = new int[input2][input1];
+        int[] arr1 = new int[input1];
 
-        for (int i = 0; i < input2; i++) {
-            for (int j = 0; j < input1; j++) {
-                arr[i][j] = in.nextInt();
-            }
+        for (int i = 0; i < input1; i++) {
+            arr1[i] = in.nextInt();
         }
 
-        System.out.print(T.solution(input1, input2, arr));
-        return;
+        int input2 = in.nextInt();
+        int[] arr2 = new int[input2];
+
+        for (int i = 0; i < input2; i++) {
+            arr2[i] = in.nextInt();
+        }
+
+        for (int i : T.solution(input1, arr1, input2, arr2)) {
+            System.out.print(i + " ");
+        }
+
     }
 }
