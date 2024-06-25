@@ -2,60 +2,45 @@ import java.util.*;
 
 public class Main {
 
-  public int solution(int n, int m, int[] arr) {
-   	int answer = 0;
-
-    Queue<Person> queue = new LinkedList<>();
-
-    for (int i = 0; i < n; i++) {
-     	queue.offer(new Person(i, arr[i]));
-    }
-
-
-    while (!queue.isEmpty()) {
-     	Person temp = queue.poll();
-
-      	for (Person p : queue) {
-         	if (p.priority > temp.priority) {
-             	queue.offer(temp);
-              	temp = null;
-              	break;
-            }
-        }
-
-      	if (temp != null) {
-         	answer++;
-          	if (temp.id == m) return answer;
-        }
-    }
-
-
-
-    return answer;
+  public List<Point> solution(List<Point> list) {
+    	return list;
   }
 
-  public class Person {
-   	public int id;
-    public int priority;
+  public static class Point implements Comparable<Point> {
+    public int x;
+    public int y;
 
-    public Person(int id, int priority) {
-     	this.id = id;
-      	this.priority = priority;
+    public Point(int x, int y) {
+     	this.x = x;
+      	this.y = y;
     }
+
+    @Override
+    public int compareTo(Point o) {
+     	if (x == o.x) {
+         	return y - o.y;
+        } else {
+         	return x - o.x;
+        }
+    }
+
   }
 
   public static void main(String[] args){
     Main T = new Main();
     Scanner in=new Scanner(System.in);
     int input1 = in.nextInt();
-    int input2 = in.nextInt();
-    int arr1[] = new int[input1];
+
+    List<Point> list = new ArrayList<>();
 
     for (int i = 0; i < input1; i++) {
-     	arr1[i] = in.nextInt();
+     	list.add(new Point(in.nextInt(), in.nextInt())) ;
     }
 
-    System.out.println(T.solution(input1, input2, arr1));
-    return ;
+    Collections.sort(list);
+
+    for (Point p : T.solution(list)) {
+     	System.out.println(p.x + " " + p.y);
+    }
   }
 }
