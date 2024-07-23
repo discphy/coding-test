@@ -1,7 +1,7 @@
 package section7;
 
-// 7-9 Tree 말단노드까지의 가장 짧은 경로
-public class TreeMinPath {
+// 7-9 Tree 말단노드까지의 가장 짧은 경로 DFS
+public class TreeMinPathDFS {
 
     public static class Node {
         int data;
@@ -21,7 +21,7 @@ public class TreeMinPath {
     }
 
     public static void main(String[] args) {
-        TreeMinPath T = new TreeMinPath();
+        TreeMinPathDFS T = new TreeMinPathDFS();
         T.root = new Node(1);
         T.root.lt = new Node(2);
         T.root.rt = new Node(3);
