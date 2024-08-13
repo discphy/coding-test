@@ -5,25 +5,17 @@ import java.util.Queue;
 import java.util.Scanner;
 
 // 8-11 미로의 최단거리
-class Point {
-    int x, y;
-    Point(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-}
-
 public class FindMinDistanceMaze {
 
-    static int[] dx = { -1, 0, 1, 0 };
-    static int[] dy = { 0, 1, 0, -1 };
+    static int[] dx = {-1, 0, 1, 0};
+    static int[] dy = {0, 1, 0, -1};
     static int[][] board, dis;
 
     public void BFS(int x, int y) {
         Queue<Point> Q = new LinkedList<>();
         Q.offer(new Point(x, y));
         board[x][y] = 1;
-        while(!Q.isEmpty()) {
+        while (!Q.isEmpty()) {
             Point tmp = Q.poll();
             for (int i = 0; i < 4; i++) {
                 int nx = tmp.x + dx[i];
@@ -54,6 +46,15 @@ public class FindMinDistanceMaze {
             System.out.println(-1);
         } else {
             System.out.println(dis[7][7]);
+        }
+    }
+
+    static class Point {
+        int x, y;
+
+        Point(int x, int y) {
+            this.x = x;
+            this.y = y;
         }
     }
 }
